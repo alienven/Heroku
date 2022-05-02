@@ -12,6 +12,7 @@
         "type": "field",
         "domain": [
           "domain:googleapis.cn",
+          "geosite:google",
           "geosite:geolocation-!cn"
         ],
         "ip": [
