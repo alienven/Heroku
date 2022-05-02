@@ -1,0 +1,77 @@
+{
+  "dns": {
+    "servers": [
+      "https://1.1.1.1/dns-query"
+    ],
+    "queryStrategy": "UseIPv4"
+  },
+  "routing": {
+    "domainStrategy": "IPIfNonMatch",
+    "rules": [
+      {
+        "type": "field",
+        "domain": [
+          "domain:googleapis.cn",
+          "geosite:google",
+          "geosite:geolocation-!cn"
+        ],
+        "ip": [
+          "1.1.1.1"
+        ],
+        "outboundTag": "direct"
+      },
+      {
+        "type": "field",
+        "domain": [
+          "geosite:private",
+          "geosite:category-ads-all",
+          "geosite:cn"
+        ],
+        "ip": [
+          "geoip:private",
+          "geoip:cn"
+        ],
+        "outboundTag": "block"
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "port": 23323,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "$UUID",
+            "alterId": 0
+          }
+        ],
+        "disableInsecureEncryption": true
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "$WS_PATH"
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      },
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {
+        "response": {
+          "type": "http"
+        }
+      },
+      "tag": "block"
+    }
+  ]
+}

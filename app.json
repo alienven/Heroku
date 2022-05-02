@@ -1,0 +1,30 @@
+{
+  "name": "Heroku",
+  "description": "部署在Heroku上",
+  "keywords": [
+    "Heroku"
+  ],
+  "env": {
+    "PROTOCOL": {
+      "description": "请填小写的vmess或vless",
+      "value": "vless",
+      "required": true
+    },
+    "UUID": {
+      "description": "用户的主ID",
+      "value": "3224ab7f-f353-404c-a7a9-49c9de15b0bd",
+      "required": true
+    },
+    "WS_PATH": {
+      "description": "websocket路径",
+      "value": "/ssln",
+      "required": true
+    }
+  },
+  "website": "https://github.com/alienven/Heroku",
+  "repository": "https://github.com/alienven/Heroku",
+  "stack": "container",
+  "features": [
+    "runtime-dyno-metadata"
+  ]
+}
